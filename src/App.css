@@ -36,3 +36,38 @@
     transform: rotate(360deg);
   }
 }
+
+.navbar {
+  height: 70px;
+  display: flex;
+  justify-content: space-around;
+  min-height: 70px;
+  background: rgb(152, 251, 152);
+  color: aliceblue;
+}
+.logout {
+  margin-left: 820px;
+  margin-top: -55px;
+}
+.navtext {
+  font-size: 50;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.generale {
+  width: 1220px;
+  height: 350px;
+}
+.bouton {
+  border: none;
+  padding: 6px 10px 6px 10px;
+  border-radius: 8px;
+  background: rgb(152, 251, 152);
+  font: bold 20px Arial;
+  color: #fff;
+  margin-left: 650px;
+  margin-top: 0px;
+}
+.containerr {
+  height: 400px;
+  width: 350px;
+}

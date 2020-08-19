@@ -92,14 +92,13 @@ class Editusers extends Component {
 
   render() {
     return (
-      <div>
-        <h1>update admin details</h1>
-        <form onSubmit={this.handleSubmit}>
+      <div className="formTop">
+        <form className="form1" onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label>firstname </label>
+            <span className="label">firstname </span>
             <input
               type="firstname"
-              className="form-control"
+              className="limit"
               name="firstname"
               value={this.state.firstname}
               onChange={this.onChangeFirstname}
@@ -107,10 +106,10 @@ class Editusers extends Component {
             />
           </div>
           <div className="form-group">
-            <label>lastname </label>
+            <span className="label">lastname </span>
             <input
               type="lastname"
-              className="form-control"
+              className="limit"
               name="lastname"
               value={this.state.lastname}
               onChange={this.onChangeLastname}
@@ -118,10 +117,10 @@ class Editusers extends Component {
             />
           </div>
           <div className="form-group">
-            <label>email </label>
+            <span className="label">email </span>
             <input
               type="email"
-              className="form-control"
+              className="limit"
               name="email"
               value={this.state.email}
               onChange={this.onChangeEmail}
@@ -129,22 +128,18 @@ class Editusers extends Component {
             />
           </div>
           <div className="form-group">
-            <label>password </label>
+            <span className="label">password </span>
             <input
               type="password"
-              className="form-control"
+              className="limit"
               name="password"
               value={this.state.password}
               onChange={this.onChangePassword}
             />
           </div>
-          <div className="form-group">
-            <button
-              type="submit"
-              className="form-control"
-              className="btn btn-primary"
-            >
-              Update admin{" "}
+          <div className="showallBouton">
+            <button type="submit" className="Boutonshowall">
+              <span className="showallboutontext">Update admin</span>
             </button>
           </div>
         </form>

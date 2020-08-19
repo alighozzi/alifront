@@ -76,12 +76,12 @@ class Addadmin extends Component {
   }
   render() {
     return (
-      <div className="containerr">
-        <form onSubmit={this.handleSubmit}>
+      <div className="formTop">
+        <form className="form1" onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label>Firstname :</label>
+            <span className="label">Firstname :</span>
             <input
-              className="form-control"
+              className="limit"
               type="firstname"
               name="firstname"
               value={this.state.firstname}
@@ -90,9 +90,9 @@ class Addadmin extends Component {
             />
           </div>
           <div className="form-group">
-            <label>Lastname :</label>
+            <span className="label">Lastname :</span>
             <input
-              className="form-control"
+              className="limit"
               type="lastname"
               name="lastname"
               value={this.state.lastname}
@@ -101,9 +101,9 @@ class Addadmin extends Component {
             />
           </div>
           <div className="form-group">
-            <label>Email :</label>
+            <span className="label">Email :</span>
             <input
-              className="form-control"
+              className="limit"
               type="email"
               name="email"
               value={this.state.email}
@@ -112,9 +112,9 @@ class Addadmin extends Component {
             />
           </div>
           <div className="form-group">
-            <label>Password :</label>
+            <span className="label">Password :</span>
             <input
-              className="form-control"
+              className="limit"
               type="password"
               name="password"
               value={this.state.password}
@@ -123,9 +123,9 @@ class Addadmin extends Component {
             />
           </div>
           <div className="form-group">
-            <label> Confirm password :</label>
+            <span className="label"> Confirm password :</span>
             <input
-              className="form-control"
+              className="limit"
               type="password"
               name="confirmpassword"
               value={this.state.confirmpassword}
@@ -133,9 +133,9 @@ class Addadmin extends Component {
               required
             />
           </div>
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary">
-              create new admin{" "}
+          <div className="showallBouton">
+            <button type="submit" className="Boutonshowall">
+              <span className="showallboutontext">create new admin</span>
             </button>
           </div>
         </form>

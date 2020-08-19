@@ -3,7 +3,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import swal from "sweetalert";
-
+import trashicon from "../assets/images/trash.png";
+import editicon from "../assets/images/edit.png";
 const Produit = (props) => (
   <tr>
     <td>{props.produit.titre}</td>
@@ -12,16 +13,16 @@ const Produit = (props) => (
     <td>{props.produit.prix_vente_potentiel}</td>
     <td>{props.produit.frais_port}</td>
     <td>{props.produit.taille}</td>
-    <td>{props.produit.couleur}</td>
+    <td>{props.produit.couleurs[0].couleur}</td>
     <td>
       <Link
         to={"/home/Productsourcing/Showall/product/Edit/" + props.produit._id}
       >
-        Edit
+        <img src={editicon} alt="logo" className="logouticon"></img>
       </Link>{" "}
       |
-      <a
-        href="#"
+      <button
+        className="boutonIcon"
         onClick={() => {
           swal({
             title: "Are you sure?",
@@ -41,8 +42,8 @@ const Produit = (props) => (
           });
         }}
       >
-        Delete
-      </a>
+        <img src={trashicon} alt="logo" className="logouticon"></img>
+      </button>
     </td>
   </tr>
 );
@@ -107,34 +108,40 @@ class Product extends Component {
   }
   render() {
     return (
-      <div>
-        <h1>Product Lists </h1>
-        <button
-          className="bouton"
-          onClick={() => {
-            this.props.history.push(
-              "/home/Productsourcing/Showall/product/Add/" +
-                this.props.match.params.id
-            );
-          }}
-        >
-          + Create new Product
-        </button>
-        <table className="table">
-          <thead className="thead-light">
-            <tr>
-              <th>Title</th>
-              <th>Url</th>
-              <th>Unit price</th>
-              <th>potentiel sales price</th>
-              <th>shipping fees</th>
-              <th>sizes</th>
-              <th>colors</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>{this.ProductList()}</tbody>
-        </table>
+      <div className="showallWraper">
+        <div className="showallTitle">
+          <span>Product Lists </span>
+        </div>
+        <div className="showallBouton">
+          <button
+            className="Boutonshowall"
+            onClick={() => {
+              this.props.history.push(
+                "/home/Productsourcing/Showall/product/Add/" +
+                  this.props.match.params.id
+              );
+            }}
+          >
+            <span className="showallboutontext">+ Create new Product </span>
+          </button>
+        </div>
+        <div className="showallTab">
+          <table className="table">
+            <thead className="thead-light">
+              <tr>
+                <th>Title</th>
+                <th>Url</th>
+                <th>Unit price</th>
+                <th>potentiel sales price</th>
+                <th>shipping fees</th>
+                <th>sizes</th>
+                <th>colors</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>{this.ProductList()}</tbody>
+          </table>
+        </div>
       </div>
     );
   }

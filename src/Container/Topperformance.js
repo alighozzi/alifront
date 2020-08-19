@@ -2,11 +2,14 @@ import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { CSVLink } from "react-csv";
+import "./toperformance.css";
+import back from "../assets/images/back.png";
+import Resulttop from "./Resultattop";
 
 import axios from "axios";
 const headers = [
-  { label: "Prix", key: "prix" },
-  { label: "SubCategorie", key: "titre" },
+  { label: "Price", key: "prix" },
+  { label: "Tile", key: "titre" },
 ];
 const subcategorie = {
   multimedia: [
@@ -95,6 +98,7 @@ class Topperformance extends Component {
       categorie: "",
       subcategorie: "",
       nbafficher: "",
+      show: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChangestartDate = this.onChangestartDate.bind(this);
@@ -144,19 +148,10 @@ class Topperformance extends Component {
   }
   handleSubmit(event) {
     event.preventDefault();
-    // const fournisseur = {
-    //   startDate: this.state.startDate,
-    //   endDate: this.state.endDate,
-    //   selon: this.state.selon,
-    //   categorie: this.state.categorie,
-    //   subcategorie: this.state.subcategorie,
-    //   nbafficher: this.state.nbafficher,
-    // };
     const token = window.localStorage.getItem("token");
     axios
       .get(
         `http://localhost:5000/api/show/all/produit-babaliste/${this.state.categorie}/${this.state.subcategorie}/${this.state.nbafficher}/${this.state.startDate}/${this.state.endDate}/${this.state.selon}`,
-        //`http://localhost:5000/api/show/all/produit-babaliste/${this.state.categorie}/telephone/3/2020-06-01/2020-06-29/nbMessages`,
 
         {
           headers: {
@@ -166,110 +161,129 @@ class Topperformance extends Component {
       )
       .then((response) => {
         this.setState({ produits: response.data });
-        console.log(this.state.produits);
       });
-    // console.log(this.state.categorie);
-    // console.log(this.state.subcategorie);
-    // console.log(this.state.nbafficher);
-    // console.log(this.state.selon);
-    // console.log(this.state.startDate);
-    // console.log(this.state.endDate);
+    this.setState({ show: true });
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div className="form-group">
-          <label>from :</label>
-          <DatePicker
-            placeholderText="Click to select start date"
-            className="form-control"
-            selected={this.state.startDate}
-            onChange={this.onChangestartDate}
-            dateFormat={"yyyy-MM-dd"}
-          />
-        </div>
-        <div className="form-group">
-          to :
-          <DatePicker
-            placeholderText="Click to select end date"
-            className="form-control"
-            selected={this.state.endDate}
-            onChange={this.onChangeendDate}
-            dateFormat={"yyyy-MM-dd"}
-          />
-        </div>
-        <div className="form-group">
-          nombre de produit aficher :
-          <input
-            type="number"
-            className="form-control"
-            onChange={this.onchangeNbafficher}
-            value={this.state.nbafficher}
-          />
-        </div>
-        <div className="form-group">
-          <label> Categorie</label>
-          <select
-            className="form-control"
-            value={this.state.categorie}
-            onChange={this.onChangeCategorie}
-            id="input"
-          >
-            {categorie.map((categorie, index) => {
-              return (
-                <option key={index} value={categorie}>
-                  {categorie}
-                </option>
-              );
-            })}
-          </select>
-          Sous categorie{" "}
-          <div className="form-group">
-            <select
-              className="form-control"
-              onChange={this.onChangeSubCategorie}
-              value={this.state.subcategorie}
-              disabled={!this.state.categorie ? true : false}
-            >
-              {subcategorie[this.state.categorie]?.map((item, index) => (
-                <option key={index} value={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
+      <div className="formTop">
+        {!this.state.show && (
+          <form className="form1" onSubmit={this.handleSubmit}>
+            <div className="form-group">
+              <span className="label">From </span>
+              <DatePicker
+                placeholderText="Click to select start date"
+                className="form-control"
+                selected={this.state.startDate}
+                onChange={this.onChangestartDate}
+                dateFormat={"yyyy-MM-dd"}
+              />
+            </div>
+            <div className="form-group">
+              <span className="label">To </span>
+              <DatePicker
+                placeholderText="Click to select end date"
+                className="form-control"
+                selected={this.state.endDate}
+                onChange={this.onChangeendDate}
+                dateFormat={"yyyy-MM-dd"}
+              />
+            </div>
+            <div className="form-group">
+              <span className="label">Nombre de produit a aficher :</span>
+              <input
+                placeholder="number of product to show"
+                type="number"
+                className="limit"
+                onChange={this.onchangeNbafficher}
+                value={this.state.nbafficher}
+              />
+            </div>
+
+            <div className="form-group">
+              <span className="label">Categorie</span>
+              <select
+                className="limit"
+                value={this.state.categorie}
+                onChange={this.onChangeCategorie}
+                id="input"
+              >
+                {categorie.map((categorie, index) => {
+                  return (
+                    <option key={index} value={categorie}>
+                      {categorie}
+                    </option>
+                  );
+                })}
+              </select>
+              <span className="label">Sous categorie</span>{" "}
+              <div className="form-group">
+                <select
+                  className="limit"
+                  //className="form-control"
+                  onChange={this.onChangeSubCategorie}
+                  value={this.state.subcategorie}
+                  disabled={!this.state.categorie ? true : false}
+                >
+                  {subcategorie[this.state.categorie]?.map((item, index) => (
+                    <option key={index} value={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div className="groupbox">
+              <div className="spanbox">
+                <span className="labell"> Viwes</span>{" "}
+                <input
+                  type="checkbox"
+                  name="nbVues"
+                  //className="form-control"
+                  className="box"
+                  checked={this.state.selon === "nbVues"}
+                  onChange={this.onchangecheck}
+                />
+              </div>
+              <div className="spanbox">
+                <span className="labell">Messages</span>{" "}
+                <input
+                  type="checkbox"
+                  name="nbMessages"
+                  checked={this.state.selon === "nbMessages"}
+                  onChange={this.onchangecheck}
+                  className="box"
+                />
+              </div>
+            </div>
+            <div className="showallBouton">
+              <button type="submit" className="Boutonshowall">
+                <span className="showallboutontext">Search</span>
+              </button>
+            </div>
+          </form>
+        )}
+        {this.state.show && (
+          <div className="daberassek">
+            <div className="entete">
+              <button
+                className="boutonIcon"
+                onClick={() => this.setState({ show: false })}
+              >
+                <img src={back} alt="logo" className="logouticon"></img>
+              </button>
+              <CSVLink
+                data={this.state.produits}
+                headers={headers}
+                separator={"                 "}
+              >
+                Export to csv
+              </CSVLink>
+            </div>
+            <Resulttop results={this.state.produits}></Resulttop>
           </div>
-        </div>
-        <div className="form-group">
-          vues{" "}
-          <input
-            type="checkbox"
-            name="nbVues"
-            className="form-control"
-            checked={this.state.selon === "nbVues"}
-            onChange={this.onchangecheck}
-          />
-          messages{" "}
-          <input
-            type="checkbox"
-            name="nbMessages"
-            checked={this.state.selon === "nbMessages"}
-            onChange={this.onchangecheck}
-            className="form-control"
-          />
-        </div>
-        <div className="form-group">
-          <button type="submit" className="form-control">
-            recherche
-          </button>
-        </div>
-        <CSVLink
-          data={this.state.produits}
-          headers={headers}
-          separator={"                 "}
-        >
-          Export to csv
-        </CSVLink>
-      </form>
+        )}
+      </div>
     );
   }
 }

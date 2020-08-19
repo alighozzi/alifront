@@ -58,14 +58,14 @@ class Login extends Component {
     return (
       <div className="wrap">
         <div className="headerwraper">
-          <h4> product sourcing management platform</h4>
+          {/* <h4> product sourcing management platform</h4> */}
           <div className="logoWraper">
             <img src={logo} className="image" alt="logo" />
           </div>
         </div>
         <div className="body">
           <form className="login" onSubmit={this.handleSubmit}>
-            <h2>Please enter your login details to get started</h2>
+            <h2>Welcome</h2>
             <div className="formContainer">
               <div className="form-group formStyle">
                 <label for="email">Email </label>

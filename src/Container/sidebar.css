@@ -1,7 +1,11 @@
 .sidebar {
-  width: 310px;
-  height: 700px;
-
+  height: calc(100% - 51px);
+  border-right: 1px solid transparent;
   margin-top: 10px;
-  background-color: rgb(152, 251, 152);
+  background-color: #f6f6f6;
+  box-shadow: 1px 3px 6px #4d4d4d;
+}
+.gridContainer {
+  height: 100%;
+  margin: 0px 0px;
 }

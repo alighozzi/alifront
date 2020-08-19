@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { logoutUser } from "../redux/actions/userActions";
 import { connect } from "react-redux";
+import logouticon from "../assets/images/logout.png";
 //import { Link } from "react-router-dom";
 
 class Navbar extends Component {
@@ -25,16 +26,13 @@ class Navbar extends Component {
 
   render() {
     return (
-      <div className="navbar">
-        <form onSubmit={this.logout}>
-          <h1 className="navtext">back-office plateform for babaliste</h1>{" "}
-          <div className="logout">
-            <button type="submit" className="glyphicon glyphicon-log-out">
-              {" "}
-              logout
-            </button>
-          </div>
-        </form>
+      <div className="navigation">
+        <span className="navtext">Back-office plateform for Babaliste</span>{" "}
+        <div className="logout">
+          <button type="submit" onClick={this.logout} className="buttonlogout">
+            <img src={logouticon} alt="logo" className="logouticon"></img>
+          </button>
+        </div>
       </div>
     );
   }

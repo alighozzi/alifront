@@ -42,12 +42,14 @@ class Home extends Component {
     // console.log("render home", match);
     return (
       <div className="generale">
-        <Grid container spacing={2}>
-          <Grid item sm={3} xs={12}>
-            <img src={logo} alt="logo" />
+        <Grid container spacing={2} className="gridContainer">
+          <Grid item sm={2} xs={12} className="gridSidebar">
+            <div className="gridLogo">
+              <img src={logo} alt="logo" />
+            </div>
             <Sidebar />
           </Grid>
-          <Grid item sm={9} xs={12}>
+          <Grid item sm={10} xs={12}>
             <Navbar></Navbar>
             <Switch>
               <Route

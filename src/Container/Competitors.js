@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { CSVLink } from "react-csv";
+import back from "../assets/images/back.png";
+import Resultatcom from "./Resultatcom";
 const websites = ["", "Etam", "LcWaikiki"];
 const headers = [
   { label: "Titre            ", key: "titre" },
@@ -13,6 +15,7 @@ class Competitors extends Component {
       produits: [],
       website: "",
       searchitem: "",
+      show: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChangeWebsite = this.onChangeWebsite.bind(this);
@@ -27,9 +30,10 @@ class Competitors extends Component {
       )
       .then((response) => {
         this.setState({ produits: response.data });
-        console.log(this.state.produits);
+        console.log("resultat", this.state.produits);
       })
       .catch((error) => console.log("erreur :", error));
+    this.setState({ show: true });
   }
 
   onChangeWebsite(event) {
@@ -50,13 +54,14 @@ class Competitors extends Component {
 
   render() {
     return (
-      <div>
-        <div className="containerr">
-          <form onSubmit={this.handleSubmit}>
+      <div className="formCom">
+        {!this.state.show && (
+          <form className="form2" onSubmit={this.handleSubmit}>
             <div className="form-group">
-              <label>Web Site :</label>
+              <span className="label">Web Site </span>
               <select
-                className="form-control"
+                placeholder="Choose the website to scrape"
+                className="limit"
                 value={this.state.website}
                 onChange={this.onChangeWebsite}
               >
@@ -70,9 +75,9 @@ class Competitors extends Component {
               </select>
             </div>
             <div className="form-group">
-              <label>searching for :</label>
+              <span className="label">Searching for </span>
               <input
-                className="form-control"
+                className="limit"
                 type="text"
                 name="searchitem"
                 value={this.state.keyword}
@@ -80,20 +85,33 @@ class Competitors extends Component {
                 required
               />
             </div>
-            <div className="form-group">
-              <button type="submit" className="btn btn-primary">
-                search{" "}
+            <div className="showallBouton">
+              <button type="submit" className="Boutonshowall">
+                <span className="showallboutontext">Search</span>
               </button>
             </div>
-            <CSVLink
-              data={this.state.produits}
-              headers={headers}
-              separator={"    "}
-            >
-              Export to csv
-            </CSVLink>
           </form>
-        </div>
+        )}
+        {this.state.show && (
+          <div className="daberassekk">
+            <div>
+              <button
+                className="boutonIcon"
+                onClick={() => this.setState({ show: false })}
+              >
+                <img src={back} alt="logo" className="logouticon"></img>
+                <CSVLink
+                  data={this.state.produits}
+                  headers={headers}
+                  separator={"    "}
+                >
+                  Export to csv
+                </CSVLink>
+              </button>
+            </div>
+            <Resultatcom results={this.state.produits}></Resultatcom>
+          </div>
+        )}
       </div>
     );
   }

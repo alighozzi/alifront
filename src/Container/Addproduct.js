@@ -5,7 +5,7 @@ import axios from "axios";
 
 const tailles = ["", "S", "M", "L", "XL"];
 
-class Addsupplier extends Component {
+class Addproduct extends Component {
   constructor() {
     super();
     this.state = {
@@ -15,6 +15,7 @@ class Addsupplier extends Component {
       prix_vente_potentiel: "",
       frais_port: "",
       taille: "",
+      //photo: "",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChangeTitre = this.onChangeTitre.bind(this);
@@ -25,6 +26,7 @@ class Addsupplier extends Component {
     );
     this.onChangeFrais_port = this.onChangeFrais_port.bind(this);
     this.onChangeTaille = this.onChangeTaille.bind(this);
+    //this.onChangeImage = this.onChangeImage.bind(this);
   }
   handleSubmit(event) {
     event.preventDefault();
@@ -34,7 +36,7 @@ class Addsupplier extends Component {
       prix_unitaire: this.state.prix_unitaire,
       prix_vente_potentiel: this.state.prix_vente_potentiel,
       frais_port: this.state.frais_port,
-      taille: this.state.taille,
+      //taille: this.state.taille,
     };
     const token = window.localStorage.getItem("token");
     axios
@@ -88,93 +90,103 @@ class Addsupplier extends Component {
       taille: event.target.value,
     });
   }
+  // onChangeImage(event) {}
 
   render() {
     return (
-      <div>
-        <div className="containerr">
-          <form onSubmit={this.handleSubmit}>
-            <div className="form-group">
-              <label>titre :</label>
-              <input
-                className="form-control"
-                type="text"
-                name="titre"
-                value={this.state.titre}
-                onChange={this.onChangeTitre}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label>Url :</label>
-              <input
-                className="form-control"
-                type="text"
-                name="url"
-                value={this.state.url}
-                onChange={this.onChangeUrl}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label>Unit price :</label>
-              <input
-                className="form-control"
-                type="Number"
-                name="url"
-                value={this.state.prix_unitaire}
-                onChange={this.onChangePrix_unitaire}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label>potentiel sales price :</label>
-              <input
-                className="form-control"
-                type="Number"
-                name="url"
-                value={this.state.prix_vente_potentiel}
-                onChange={this.onChangePrix_vente_potentiel}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label>Shipping fees:</label>
-              <input
-                className="form-control"
-                type="Number"
-                name="url"
-                value={this.state.frais_port}
-                onChange={this.onChangeFrais_port}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label>taille :</label>
-              <select
-                className="form-control"
-                value={this.state.taille}
-                onChange={this.onChangeTaille}
-              >
-                {tailles.map((taille, index) => {
-                  return (
-                    <option key={index} value={taille}>
-                      {taille}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
+      <div className="formTop">
+        <form className="form1" onSubmit={this.handleSubmit}>
+          <div className="form-group">
+            <span className="label">titre :</span>
+            <input
+              className="limit"
+              type="text"
+              name="titre"
+              value={this.state.titre}
+              onChange={this.onChangeTitre}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <span className="label">Url :</span>
+            <input
+              className="limit"
+              type="text"
+              name="url"
+              value={this.state.url}
+              onChange={this.onChangeUrl}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <span className="label">Unit price :</span>
+            <input
+              className="limit"
+              type="Number"
+              name="url"
+              value={this.state.prix_unitaire}
+              onChange={this.onChangePrix_unitaire}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <span className="label">Potentiel sales price :</span>
+            <input
+              className="limit"
+              type="Number"
+              name="url"
+              value={this.state.prix_vente_potentiel}
+              onChange={this.onChangePrix_vente_potentiel}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <span className="label">Shipping fees:</span>
+            <input
+              className="limit"
+              type="Number"
+              name="url"
+              value={this.state.frais_port}
+              onChange={this.onChangeFrais_port}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <span className="label">Size :</span>
+            <select
+              className="limit"
+              value={this.state.taille}
+              onChange={this.onChangeTaille}
+            >
+              {tailles.map((taille, index) => {
+                return (
+                  <option key={index} value={taille}>
+                    {taille}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          {/* <div className="form-group">
+            <span className="label">Upload image:</span>
+            <input
+              className="limit"
+              type="file"
+              name="image"
+              value={this.state.photo}
+              size="10"
+              onChange={this.onChangeImage}
+            />
+          </div> */}
 
-            <div className="form-group">
-              <button type="submit" className="btn btn-primary">
-                create new product{" "}
-              </button>
-            </div>
-          </form>
-        </div>
+          <div className="showallBouton">
+            <button type="submit" className="Boutonshowall">
+              <span className="showallboutontext">Create new product</span>
+            </button>
+          </div>
+        </form>
       </div>
     );
   }
 }
-export default Addsupplier;
+export default Addproduct;

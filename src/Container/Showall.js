@@ -3,7 +3,9 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import swal from "sweetalert";
-
+import trashicon from "../assets/images/trash.png";
+import editicon from "../assets/images/edit.png";
+import producticon from "../assets/images/product.png";
 const Fournisseur = (props) => (
   <tr>
     <td>{props.fournisseur.nom}</td>
@@ -20,11 +22,11 @@ const Fournisseur = (props) => (
           props.fournisseur._id
         }
       >
-        Edit
+        <img src={editicon} alt="logo" className="logouticon"></img>
       </Link>{" "}
       |
-      <a
-        href="#"
+      <button
+        className="boutonIcon"
         onClick={() => {
           swal({
             title: "Are you sure?",
@@ -44,13 +46,13 @@ const Fournisseur = (props) => (
           });
         }}
       >
-        Delete
-      </a>
+        <img src={trashicon} alt="logo" className="logouticon"></img>
+      </button>
       |
       <Link
         to={"/home/Productsourcing/Showall/product/" + props.fournisseur._id}
       >
-        Products
+        <img src={producticon} alt="logo" className="logouticon"></img>
       </Link>{" "}
     </td>
   </tr>
@@ -112,31 +114,37 @@ class Showall extends Component {
   }
   render() {
     return (
-      <div>
-        <h1>Supplier Lists </h1>
-        <button
-          className="bouton"
-          onClick={() => {
-            this.props.history.push("/home/Productsourcing/Showall/add");
-          }}
-        >
-          + Create new Supplier
-        </button>
-        <table className="table">
-          <thead className="thead-light">
-            <tr>
-              <th>Nom</th>
-              <th>Url</th>
-              <th>Categorie</th>
-              <th>Sous_categorie</th>
-              <th>taux reponse</th>
-              <th>taux livraison</th>
-              <th>note moyenne</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>{this.FournisseurList()}</tbody>
-        </table>
+      <div className="showallWraper">
+        <div className="showallTitle">
+          <span>Supplier Lists </span>
+        </div>
+        <div className="showallBouton">
+          <button
+            className="Boutonshowall"
+            onClick={() => {
+              this.props.history.push("/home/Productsourcing/Showall/add");
+            }}
+          >
+            <span className="showallboutontext">+ Create new Supplier </span>
+          </button>
+        </div>
+        <div className="showallTab">
+          <table className="table">
+            <thead className="thead-light">
+              <tr>
+                <th>Nom</th>
+                <th>Url</th>
+                <th>Categorie</th>
+                <th>Sous_categorie</th>
+                <th>taux reponse</th>
+                <th>taux livraison</th>
+                <th>note moyenne</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>{this.FournisseurList()}</tbody>
+          </table>
+        </div>
       </div>
     );
   }

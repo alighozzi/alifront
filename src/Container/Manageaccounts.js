@@ -3,6 +3,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import swal from "sweetalert";
+import trashicon from "../assets/images/trash.png";
+import editicon from "../assets/images/edit.png";
 const Admin = (props) => (
   <tr>
     <td>{props.admin.firstname}</td>
@@ -10,13 +12,12 @@ const Admin = (props) => (
     <td>{props.admin.email}</td>
     <td>
       <Link to={"/home/Accounts/Manageaccounts/update/" + props.admin._id}>
-        Edit
+        <img src={editicon} alt="logo" className="logouticon"></img>
       </Link>{" "}
       |
-      <a
-        href="#"
+      <button
+        className="boutonIcon"
         onClick={() => {
-          //props.deleteAdmin(props.admin._id);
           swal({
             title: "Are you sure?",
             text: "this action is permanent",
@@ -35,8 +36,8 @@ const Admin = (props) => (
           });
         }}
       >
-        Delete
-      </a>
+        <img src={trashicon} alt="logo" className="logouticon"></img>
+      </button>
     </td>
   </tr>
 );
@@ -98,27 +99,35 @@ class Manageaccounts extends Component {
   }
   render() {
     return (
-      <div>
-        <h1>Admins Lists </h1>
-        <button
-          className="bouton"
-          onClick={() => {
-            this.props.history.push("/home/Accounts/Manageaccounts/add");
-          }}
-        >
-          + Create Admin Account
-        </button>
-        <table className="table">
-          <thead className="thead-light">
-            <tr>
-              <th>Firstname</th>
-              <th>Lastname</th>
-              <th>Email</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>{this.AdminList()}</tbody>
-        </table>
+      <div className="showallWraper">
+        <div className="showallTitle">
+          <span>Admin Lists </span>
+        </div>
+        <div className="showallBouton">
+          <button
+            className="Boutonshowall"
+            onClick={() => {
+              this.props.history.push("/home/Accounts/Manageaccounts/add");
+            }}
+          >
+            <span className="showallboutontext">
+              + Create new Admin account{" "}
+            </span>
+          </button>
+        </div>
+        <div className="showallTab">
+          <table className="table">
+            <thead className="thead-light">
+              <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>{this.AdminList()}</tbody>
+          </table>
+        </div>
       </div>
     );
   }

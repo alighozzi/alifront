@@ -19,14 +19,13 @@ import { withRouter, Link as RouterLink } from "react-router-dom";
 //   "/coucou": "coucou",
 // };
 const breadcrumbNameMap = {
-  "/home": "home",
-  "/home/topperformance": "top performance",
+  "/home": "Home",
+  "/home/topperformance": "Top performance",
   "/home/Productsourcing": "Product sourcing",
   "/home/Productsourcing/Competitors": "Competitors",
-  "/home/Productsourcing/Sourcingplanner": "Sourcing planner",
   "/home/Productsourcing/Showall": "Show all",
   "/home/Accounts": "Accounts",
-  "/home/Accounts/Myaccount": "My account",
+
   "/home/Accounts/Manageaccounts": "Manage all accounts",
 };
 
@@ -42,6 +41,17 @@ const useStyles = makeStyles((theme) => ({
   },
   nested: {
     paddingLeft: theme.spacing(4),
+    color: "white",
+    fontSize: 18,
+    fontFamily: "Poppins",
+  },
+  ecrire: {
+    color: "#4d4d4d",
+    fontSize: 18,
+    fontFamily: "Poppins",
+  },
+  flech: {
+    color: "#4d4d4d",
   },
 }));
 
@@ -62,7 +72,7 @@ const RouterBreadcrumbs = ({ history }) => {
             history.push(`${to}`);
           }}
         >
-          <ListItemText primary={primary} />
+          <ListItemText primary={primary} className={classes.ecrire} />
         </ListItem>
       </li>
     );
@@ -70,12 +80,19 @@ const RouterBreadcrumbs = ({ history }) => {
 
   const ListItemCollapse = (props) => {
     const { to, open, ...other } = props;
+
     const primary = breadcrumbNameMap[to];
     return (
       <li>
         <ListItem button onClick={() => handleClickCollapse(to)}>
-          <ListItemText primary={primary} />
-          {open != null ? open ? <ExpandLess /> : <ExpandMore /> : null}
+          <ListItemText primary={primary} className={classes.ecrire} />
+          {open != null ? (
+            open ? (
+              <ExpandLess className={classes.flech} />
+            ) : (
+              <ExpandMore className={classes.flech} />
+            )
+          ) : null}
         </ListItem>
       </li>
     );
@@ -93,9 +110,16 @@ const RouterBreadcrumbs = ({ history }) => {
       <div className="sidebar">
         <nav aria-label="mailbox folders">
           <List>
-            <ListItemLink to="/home" />
-            <ListItemLink to="/home/topperformance" />
-            <ListItemCollapse to="/home/Productsourcing" open={openProduct} />
+            <ListItemLink to="/home" className={classes.ecrire} />
+            <ListItemLink
+              to="/home/topperformance"
+              className={classes.ecrire}
+            />
+            <ListItemCollapse
+              to="/home/Productsourcing"
+              open={openProduct}
+              className={classes.ecrire}
+            />
             <Collapse
               component="li"
               in={openProduct}
@@ -108,16 +132,16 @@ const RouterBreadcrumbs = ({ history }) => {
                   className={classes.nested}
                 />
                 <ListItemLink
-                  to="/home/Productsourcing/Sourcingplanner"
-                  className={classes.nested}
-                />
-                <ListItemLink
                   to="/home/Productsourcing/Showall"
                   className={classes.nested}
                 />
               </List>
             </Collapse>
-            <ListItemCollapse to="/home/Accounts" open={openAccount} />
+            <ListItemCollapse
+              to="/home/Accounts"
+              open={openAccount}
+              className={classes.ecrire}
+            />
             <Collapse
               component="li"
               in={openAccount}
@@ -125,10 +149,6 @@ const RouterBreadcrumbs = ({ history }) => {
               unmountOnExit
             >
               <List disablePadding>
-                <ListItemLink
-                  to="/home/Accounts/Myaccount"
-                  className={classes.nested}
-                />
                 <ListItemLink
                   to="/home/Accounts/Manageaccounts"
                   className={classes.nested}

@@ -98,101 +98,99 @@ class Addsupplier extends Component {
 
   render() {
     return (
-      <div>
-        <div className="containerr">
-          <form onSubmit={this.handleSubmit}>
-            <div className="form-group">
-              <label>Name :</label>
-              <input
-                className="form-control"
-                type="firstname"
-                name="firstname"
-                value={this.state.nom}
-                onChange={this.onChangeNom}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label>Url :</label>
-              <input
-                className="form-control"
-                type="lastname"
-                name="lastname"
-                value={this.state.url}
-                onChange={this.onChangeUrl}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label>Categorie :</label>
-              <select
-                className="form-control"
-                value={this.state.categorie}
-                onChange={this.onChangeCategorie}
-                id="input"
-              >
-                {categories.map((categorie, index) => {
-                  return (
-                    <option key={index} value={categorie}>
-                      {categorie}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-            <div className="form-group">
-              <label>sub Categorie</label>
-              <select
-                className="form-control"
-                onChange={this.onChangeSous_categorie}
-                value={this.state.sous_categorie}
-                disabled={!this.state.categorie ? true : false}
-              >
-                {sous_categorie[this.state.categorie]?.map((item) => (
-                  <option value={item}>{item}</option>
-                ))}
-              </select>
-            </div>
-            <div className="form-group">
-              <label> taux de livraison :</label>
-              <input
-                className="form-control"
-                type="Number"
-                name="taux_livraison"
-                value={this.state.taux_livraison}
-                onChange={this.onChangeTaux_livraison}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label> taux de reponse :</label>
-              <input
-                className="form-control"
-                type="Number"
-                name="taux_reponse"
-                value={this.state.taux_reponse}
-                onChange={this.onChangeTaux_reponse}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label> note moyenne :</label>
-              <input
-                className="form-control"
-                type="Number"
-                name="note_moyenne"
-                value={this.state.note_moyenne}
-                onChange={this.onChangeNote_moyenne}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <button type="submit" className="btn btn-primary">
-                create new supplier{" "}
-              </button>
-            </div>
-          </form>
-        </div>
+      <div className="formTop">
+        <form className="form1" onSubmit={this.handleSubmit}>
+          <div className="form-group">
+            <span className="label">Name :</span>
+            <input
+              className="limit"
+              type="firstname"
+              name="firstname"
+              value={this.state.nom}
+              onChange={this.onChangeNom}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <span className="label">Url :</span>
+            <input
+              className="limit"
+              type="lastname"
+              name="lastname"
+              value={this.state.url}
+              onChange={this.onChangeUrl}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <span className="label">Categorie :</span>
+            <select
+              className="limit"
+              value={this.state.categorie}
+              onChange={this.onChangeCategorie}
+              id="input"
+            >
+              {categories.map((categorie, index) => {
+                return (
+                  <option key={index} value={categorie}>
+                    {categorie}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div className="form-group">
+            <span className="label">Sub Categorie</span>
+            <select
+              className="limit"
+              onChange={this.onChangeSous_categorie}
+              value={this.state.sous_categorie}
+              disabled={!this.state.categorie ? true : false}
+            >
+              {sous_categorie[this.state.categorie]?.map((item) => (
+                <option value={item}>{item}</option>
+              ))}
+            </select>
+          </div>
+          <div className="form-group">
+            <span className="label"> Delivery rate :</span>
+            <input
+              className="limit"
+              type="Number"
+              name="taux_livraison"
+              value={this.state.taux_livraison}
+              onChange={this.onChangeTaux_livraison}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <span className="label"> Response rate :</span>
+            <input
+              className="limit"
+              type="Number"
+              name="taux_reponse"
+              value={this.state.taux_reponse}
+              onChange={this.onChangeTaux_reponse}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <span className="label"> Average rating :</span>
+            <input
+              className="limit"
+              type="Number"
+              name="note_moyenne"
+              value={this.state.note_moyenne}
+              onChange={this.onChangeNote_moyenne}
+              required
+            />
+          </div>
+          <div className="showallBouton">
+            <button type="submit" className="Boutonshowall">
+              <span className="showallboutontext">Create new supplier</span>
+            </button>
+          </div>
+        </form>
       </div>
     );
   }
